@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    <!-- liens CSS et autres métadonnées ici -->
+</head>
+<body>
+    <header>
+        <h1>Mon Application</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'presentation' %}">Accueil</a></li>
+                <li><a href="{% url 'login' %}">Connexion</a></li>
+                <!-- autres liens de navigation ici -->
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <p>&copy; {{ year }} Mon Application. Tous droits réservés.</p>
+    </footer>
+    <!-- scripts JavaScript ici si nécessaire -->
+</body>
+</html>

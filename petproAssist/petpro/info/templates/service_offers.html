@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offre de service</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Offres de Services</h1>
+    <ul>
+        {% for service in service_offers %}
+            <li>
+                <h2>{{ service.title }}</h2>
+                <p>{{ service.description }}</p>
+                <p>Prix : {{ service.price }} $</p>
+                <p>Prestataire : {{ service.provider.user.username }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+</body>
+</html>

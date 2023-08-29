@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a href="{% url 'petpro:login' %}">Se connecter</a>
+    <title>Login</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Connexion</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" name="username" id="username"><br>
+        <label for="password">Mot de passe :</label>
+        <input type="password" name="password" id="password"><br>
+        <input type="submit" value="Se connecter">
+    </form>
+{% endblock %}
+</body>
+</html>
+
