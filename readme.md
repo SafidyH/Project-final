@@ -6,6 +6,14 @@ git commit -m "Message de commit"
 git push origin nom-de-la-branche (généralement main ou master pour la branche principale)
 
 
+
+>git reset --hard
+HEAD is now at 37476cf '1erpush'
+
+D:\Project-final\Project-final>
+
+
+
 The basics:
 
 Each model is a Python class that subclasses django.db.models.Model

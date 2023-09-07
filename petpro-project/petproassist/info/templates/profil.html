@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+</head>
+<body>
+    <h1>Profil</h1>
+    <p>Bienvenue sur votre profil.</p>
+    <p><strong>Nom :</strong> {{ user.userprofile.nom }}</p>
+    <p><strong>Adresse :</strong> {{ user.userprofile.adresse }}</p>
+    <p><strong>Numéro de téléphone :</strong> {{ user.userprofile.numero_telephone }}</p>
+    
+    <!-- les informations du profil de l'utilisateur -->
+    {% if user.proprietaire %}
+        <h2>Propriétaire d'animaux</h2>
+        <p><strong>Animaux :</strong> {{ user.proprietaire.animaux.all|join:", " }}</p>
+        <p><strong>Besoins :</strong> {{ user.proprietaire.besoins.all|join:", " }}</p>
+        <p><strong>Commentaire :</strong> {{ user.proprietaire.commentaire }}</p>
+    {% elif user.prestataire %}
+        <h2>Prestataire de services</h2>
+        <p><strong>Services proposés :</strong> {{ user.prestataire.type_services.all|join:", " }}</p>
+        <p><strong>Tarifs :</strong> {{ user.prestataire.tarifs }} euros par heure/jour</p>
+        <p><strong>Références :</strong> {{ user.prestataire.references }} étoiles</p>
+        <p><strong>Commentaire :</strong> {{ user.prestataire.commentaire }}</p>
+    {% endif %}
+
+    <a href="{% url 'logout' %}">Déconnexion</a>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+</head>
+<body>
+    <h1>Tableau de bord</h1>
+    <p>Bienvenue sur le tableau de bord.</p>
+
+    <!-- Barre de recherche -->
+    <form method="get" action="{% url 'dashboard' %}">
+        <input type="text" name="search" placeholder="Rechercher par nom">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Liste des profils existants -->
+    <h2>Profils existants</h2>
+    <ul>
+        {% for profil in profils %}
+            <li><a href="{% url 'profile_detail' profil.user.id %}">{{ profil.user.username }}</a></li>
+        {% empty %}
+            <li>Aucun résultat trouvé.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Bouton pour accéder au profil de l'utilisateur connecté -->
+    <a href="{% url 'profil' %}">Accéder à votre profil</a>
+
+    <a href="{% url 'logout' %}">Déconnexion</a>
+</body>
+</html>
