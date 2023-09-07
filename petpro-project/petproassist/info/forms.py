@@ -38,7 +38,7 @@ class UserRegistrationForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['nom', 'prenoms', 'email', 'statut', 'password1', 'password2']
+        fields = ['username', 'last_name', 'first_name', 'email', 'statut', 'password1', 'password2']
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField()

@@ -24,13 +24,26 @@ def dashboard(request):
     
   #  return render(request, 'dashboard.html', {'profils': profils})
 
+@login_required
+def profil(request):
+    # Récupérez l'utilisateur connecté et son profil
+    user = request.user
+    profile = user.userprofile
+    
+    if not profil.profile_completed:
+        return redirect('edit_profile')  # Rediriger vers la page d'édition du profil si le profil n'est pas complet
+
+    # Affichez d'autres informations de profil si nécessaire
+    return render(request, 'profil.html', {'user': user, 'profile': profile})
+
 def register(request):
+    profil = None
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         profil = Profil(request.POST, request.FILES)
-        if form.is_valid() and profil.is_valid():
+        if form.is_valid() : #and profil.is_valid()
             user = form.save()
-            profil = profil.save(commit=False)
+            profil = profil.save() #commit=False
             profil.user = user
             profil.save()
             login(request, user)
@@ -75,23 +88,13 @@ def login_view(request):
     else:
         form = CustomAuthenticationForm()
 
-    return render(request, 'registration/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 #def profil(request):
     # Afficher le profil de l'utilisateur connecté
     #return render(request, 'profil.html')
 
-@login_required
-def profil(request):
-    # Récupérez l'utilisateur connecté et son profil
-    user = request.user
-    profile = user.userprofile
-    
-    if not profil.profile_completed:
-        return redirect('edit_profile')  # Rediriger vers la page d'édition du profil si le profil n'est pas complet
 
-    # Affichez d'autres informations de profil si nécessaire
-    return render(request, 'profil.html', {'user': user, 'profile': profile})
 
 @login_required
 def edit_profile(request):

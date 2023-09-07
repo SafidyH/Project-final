@@ -11,26 +11,47 @@ class Profil(models.Model):
     def __str__(self):
         return self.user.username
 
+class Animal(models.Model):
+    nom = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nom
+
+class Service(models.Model):
+    nom = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nom   
+
 class Proprietaire(models.Model):
     nom = models.CharField(max_length=255)
     prenoms = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)  # Vous pouvez créer un modèle Adresse séparé
     email = models.EmailField(unique=True)
     numero_telephone = models.CharField(max_length=15)
+    animaux = models.ManyToManyField(Animal, choices=(
+        ('chien', 'Chien'),
+        ('chat', 'Chat'),
+        ('poule', 'Poule'),
+        ('oiseau', 'Oiseau'),
+        ('lapin', 'Lapin'),
+        ('poisson', 'Poisson'),
+        ('autre', 'Autre'),
+    ))
     besoins = models.ManyToManyField('Service', related_name='proprietaires')
     commentaire = models.TextField(max_length=200)
 
     def __str__(self):
         return self.user.username
 
-
+    
 class Prestataire(models.Model):
     nom = models.CharField(max_length=255)
     prenoms = models.CharField(max_length=255)
     adresse = models.CharField(max_length=255)  # Encore une fois, envisagez un modèle Adresse
     email = models.EmailField(unique=True)
     numero_telephone = models.CharField(max_length=15)
-    types_services = models.ManyToManyField('Service', related_name='prestataires')
+    type_services = models.ManyToManyField(Service, related_name='prestataires')
     tarifs = models.DecimalField(max_digits=10, decimal_places=2)
     references = models.DecimalField(max_digits=3, decimal_places=2)
     commentaire = models.TextField(max_length=200)
@@ -38,15 +59,7 @@ class Prestataire(models.Model):
     def __str__(self):
         return self.user.username
 
-class Service(models.Model):
-    nom = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.nom
 
 
-class Animal(models.Model):
-    nom = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.nom
+
