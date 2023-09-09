@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Messages</title>
+</head>
+<body>
+    <h1>Liste des Messages</h1>
+    <ul>
+        {% for message in user_messages %}
+            <li>
+                <h2>De : {{ message.sender.username }}</h2>
+                <p>{{ message.content }}</p>
+            </li>
+        {% empty %}
+            <li>Aucun message disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

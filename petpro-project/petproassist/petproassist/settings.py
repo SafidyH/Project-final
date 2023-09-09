@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'info',
+    'channels',
+    'django.contrib.comments',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,24 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JSON_DATA_FILE = os.path.join(BASE_DIR, 'data', 'animaux.json')
+
+ASGI_APPLICATION = 'petproassist.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # Utilisation du backend en mémoire pour le développement
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],  # Remplacez par les informations de connexion de votre serveur Redis
+            # Configuration du backend de votre choix
+        },
+    }
+}
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # ...
+]
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+AUTH_USER_MODEL = 'info.UtilisateurPersonnalise'

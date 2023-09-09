@@ -6,17 +6,22 @@
     <title>Connexion</title>
 </head>
 <body>
-    <h1>Connexion</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        {{ form.password.label_tag }}
-        {{ form.password }}
-        {{ form.user_type.label_tag }}
-        {{ form.user_type }}
-        <button type="submit">Se connecter</button>
-    </form>
+    {% extends 'base.html' %}
+    {% block content %}  
+        <h1>Connexion</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ form.username.label_tag }} {{ form.username }}
+            {{ form.username }}
+            {{ form.password.label_tag }} {{ form.password }}
+            {{ form.password }}
+            {{ form.user_type.label_tag }}
+            {{ form.user_type }}
+            <button type="submit">Se connecter</button>
+        </form>
+        <p><a href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
+    {% endblock %}
+    <script src="path/to/websocket.js"></script>
 </body>
 </html>

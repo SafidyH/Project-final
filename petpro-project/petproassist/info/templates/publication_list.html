@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Publications</title>
+</head>
+<body>
+    <h1>Liste des Publications</h1>
+    <ul>
+        <!-- publication_detail.html -->
+        {% extends "base.html" %}
+
+        {% block content %}
+        <h1>Détails de la publication</h1>
+
+        <h2>{{ publication.title }}</h2>
+        <p>{{ publication.content }}</p>
+
+  <!-- Affichage des commentaires ici, si nécessaire -->
+        {% for comment in comments %}
+            <div class="comment">
+                <p>{{ comment.text }}</p>
+            </div>
+        {% empty %}
+            <p>Aucun commentaire pour le moment.</p>
+        {% endfor %}
+
+  <!-- Formulaire de commentaire -->
+    <h3>Ajouter un commentaire</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Commenter</button>
+    </form>
+    {% endblock %}
+        {% for publication in publications %}
+            <li>
+                <h2>{{ publication.title }}</h2>
+                <p>{{ publication.content }}</p>
+            </li>
+        {% empty %}
+            <li>Aucune publication disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

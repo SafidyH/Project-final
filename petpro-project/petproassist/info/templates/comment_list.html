@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Commentaires</title>
+</head>
+<body>
+    <h1>Liste des Commentaires</h1>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <h2>De : {{ comment.user.username }}</h2>
+                <p>{{ comment.content }}</p>
+            </li>
+        {% empty %}
+            <li>Aucun commentaire disponible.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Formulaire de création de commentaire -->
+    <h2>Ajouter un Commentaire</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Ajouter un commentaire</button>
+    </form>
+</body>
+</html>

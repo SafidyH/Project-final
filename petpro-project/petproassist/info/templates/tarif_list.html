@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Tarifs</title>
+</head>
+<body>
+    <h1>Liste des Tarifs</h1>
+    <ul>
+        {% for tarif in tarifs %}
+            <li>
+                <h2>{{ tarif.service_name }}</h2>
+                <p>Prix : {{ tarif.price }}</p>
+            </li>
+        {% empty %}
+            <li>Aucun tarif disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
