@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Profil, Proprietaire, Prestataire, Service, Animal, Publication, Tarif, Message, Comment
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
 
 class CustomAuthenticationForm(AuthenticationForm):
     user_type = forms.ChoiceField(choices=[('prestataire', 'Prestataire'), ('proprietaire', 'Propriétaire')], required=True, widget=forms.RadioSelect)

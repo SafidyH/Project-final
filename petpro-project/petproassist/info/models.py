@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.comments.models import Comment
+from django_comments_xtd.models import XtdComment as Comment
 from django.contrib.contenttypes.fields import GenericRelation
+#from django_comments_xtd import comments
+#from django.contrib.comments.models import Comment
 from django import forms
+from django.shortcuts import render
 
 class EmailAuthenticationForm(forms.Form):
     email = forms.EmailField()
@@ -81,6 +84,8 @@ class Publication(models.Model):
 def view_publication(request, publication_id):
     publication = Publication.objects.get(pk=publication_id)
     comments = publication.comments.all()
+
+    return render(request, 'votre_template.html', {'publication': publication, 'comments': comments})
 
 class Tarif(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -17,10 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from info import views
-from django.contrib.comments.urls import urlpatterns as comments_urls
-from django.urls import path, include
-from channels.routing import ProtocolTypeRouter, URLRouter
+#from django.contrib.comments.urls import urlpatterns as comments_urls
+#from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf.urls import url
+from django_comments_xtd import comments
+#from django.contrib.comments import urls as comments_urls
+#from django.contrib.comments.urls import CommentURLResolver
+#from django.contrib.comments import urls as comments_urls
+
 #from . import views
 
 urlpatterns = [
@@ -31,6 +35,12 @@ urlpatterns = [
     path('profil/', views.profil, name='profil'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('edit_profile/', views.edit_profile, name='edit_profile'), 
-    path('comments/', include(comments_urls)),
-    url(r"", include("votre_app.urls")),
+    path('comments/', include('django_comments_xtd.urls')),
+    #path('comments/', include(comments_urls)),
+    #path('comments/', CommentURLResolver()),
+    #path('comments/', comments.comment, name='comments-xtd'),
+    #path('comments/flag/<int:comment_id>/', comments.flag, name='comments-flag'),
+    #path('comments/like/<int:comment_id>/', comments.like, name='comments-like'),
+    #path('comments/approve/<int:comment_id>/', comments.approve, name='comments-approve'),
+    url(r"", include("info.urls")),
 ]

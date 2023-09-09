@@ -7,6 +7,7 @@ from .models import Profil, Publication, Tarif, Message, Comment  # Import modè
 from django.db.models import Q
 import json
 from django.conf import settings
+from django.contrib.auth.models import User
 #from django.http import HttpResponseForbidden
 
 #def some_view(request):
@@ -265,9 +266,11 @@ def view_comments(request, publication_id):
             new_comment.user = request.user
             new_comment.publication = publication
             new_comment.save()
+            #messages.success(request, 'Votre commentaire a été publié avec succès.')
+
             return redirect('view_comments', publication_id=publication.id)
 
-    return render(request, 'view_comments.html', {
+    return render(request, 'comments/view_comments.html', {
         'publication': publication,
         'comments': comments,
         'comment_form': comment_form,
