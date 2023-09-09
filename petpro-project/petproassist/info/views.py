@@ -1,11 +1,14 @@
 #from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import UserRegistrationForm, UserLoginForm
+from .forms import UserRegistrationForm, CustomAuthenticationForm, ProfilForm #UserLoginForm
 from django.contrib.auth.decorators import login_required
 from .models import Profil  # Import modèle de profil
 from django.db.models import Q
-from .forms import CustomAuthenticationForm
+import json
+from django.conf import settings
+
+# from .forms import CustomAuthenticationForm
 
 
 @login_required #(login_url='/votre_page_de_connexion/')
@@ -40,17 +43,34 @@ def register(request):
     profil = None
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
-        profil = Profil(request.POST, request.FILES)
-        if form.is_valid() : #and profil.is_valid()
+        profil = ProfilForm(request.POST, request.FILES)
+        if form.is_valid() and profil.is_valid(): #and profil.is_valid() / j'ai remodifier
             user = form.save()
-            profil = profil.save() #commit=False
+            profil = profil.save(commit=False) #commit=False
             profil.user = user
             profil.save()
             login(request, user)
             return redirect('profil')
     else:
         form = UserRegistrationForm()
+        profil = ProfilForm()  #j'ai rajouté
     return render(request, 'register.html', {'form': form, 'profil' : profil})
+
+#def register(request):
+ #   profil = None
+  #  if request.method == 'POST':
+   #     form = UserRegistrationForm(request.POST)
+#        profil = Profil(request.POST, request.FILES)
+ #       if form.is_valid() : #and profil.is_valid()
+  #          user = form.save()
+   #         profil = profil.save() #commit=False
+    #        profil.user = user
+     #       profil.save()
+      #      login(request, user)
+ #           return redirect('profil')
+  #  else:
+   #     form = UserRegistrationForm()
+    #return render(request, 'register.html', {'form': form, 'profil' : profil}) 
 
 #def login_view(request):
 #    if request.method == 'POST':
@@ -116,3 +136,11 @@ def edit_profile(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+def lire_donnees_json():
+    chemin_fichier_json = settings.JSON_DATA_FILE
+
+    with open(chemin_fichier_json, 'r') as fichier_json:
+        donnees = json.load(fichier_json)
+
+    return donnees

@@ -1,0 +1,32 @@
+{
+    "animaux": [
+        {
+            "nom": "Chien",
+            "description": "Le meilleur ami de l'homme."
+        },
+        {
+            "nom": "Chat",
+            "description": "Un animal domestique indépendant."
+        },
+        {
+            "nom": "Poule",
+            "description": "Une volaille commune."
+        },
+        {
+            "nom": "Oiseau",
+            "description": "Un compagnon ailé."
+        },
+        {
+            "nom": "Lapin",
+            "description": "Un animal de compagnie doux."
+        },
+        {
+            "nom": "Poisson",
+            "description": "Un animal aquatique."
+        },
+        {
+            "nom": "Autre",
+            "description": "Un type d'animal non répertorié."
+        }
+    ]
+}
