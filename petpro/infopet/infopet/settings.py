@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,15 +76,19 @@ WSGI_APPLICATION = 'infopet.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'petproassist',
-        'USER': 'postgres',  #postgres
-        'PASSWORD': 'Ranaivo0203', 
-        'HOST': 'localhost', #localhost
-        'PORT': '5432',
-    }
+    'default':  dj_database_url.parse('postgres://petpro_user:ji4lQvOAoB3jPGJkcx6a0sKHYHaTLApa@dpg-ck2dmib6fquc73bvuefg-a.oregon-postgres.render.com/petpro')
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'petproassist',
+#         'USER': 'postgres',  #postgres
+#         'PASSWORD': 'Ranaivo0203', 
+#         'HOST': 'localhost', #localhost
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
