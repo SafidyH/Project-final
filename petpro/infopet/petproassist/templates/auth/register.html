@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <div class="mx-auto max-w-md p-6 bg-blue-200 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Create an Account</h2>
+    <form method="post" id="registration-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% csrf_token %}
+        
+       
+        <div class="mb-4 col-span-1">
+            <div class="mb-4">
+                <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your username" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}"  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your email" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your password" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Confirm your password" />
+            </div>
+        </div>
+
+       
+        <div class="mb-4 col-span-1">
+            <div class="mb-4">
+                <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.name }}"  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your first name" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input type="text" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.name }}" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your last name" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.tel.id_for_label }}" class="block text-sm font-medium text-gray-700">Telephone</label>
+                <input type="tel" id="{{ form.tel.id_for_label }}" name="{{ form.tel.name }}"  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" placeholder="Enter your telephone number" />
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.is_owner.id_for_label }}" class="block text-gray-700 font-bold mb-2">
+                    Are you an Owner?
+                </label>
+                {{ form.is_owner }}
+            </div>
+
+            <div id="animals-field" class="mb-4 hidden">
+                <label class="block text-gray-700 font-bold mb-2">
+                    Select Animals
+                </label>
+                {{ form.animals }}
+            </div>
+        </div>
+
+        <div class="col-span-2">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<!-- <div class="mx-auto max-w-md p-6 bg-blue-200 rounded-lg shadow-lg">
+<h2 class="text-2xl font-bold mb-4">Register</h2>
+<form method="post" id="registration-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% csrf_token %}
+    
+   
+    <div class="mb-4 col-span-1">
+        <div class="mb-4">
+            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700">Username</label>
+            {{ form.username }}
+
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">Email</label>
+            {{ form.email }}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium text-gray-700">Password</label>
+            {{ form.password1 }}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            {{ form.password2 }}
+        </div>
+    </div>
+
+    
+    <div class="mb-4 col-span-1">
+        <div class="mb-4">
+            <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-700">First Name</label>
+            {{ form.first_name }}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-700">Last Name</label>
+            {{ form.last_name }}
+        </div>
+
+        <div class="mb-4">
+            <label for="{{ form.tel.id_for_label }}" class="block text-sm font-medium text-gray-700">Telephone</label>
+            {{ form.tel }}
+          </div>
+
+        <div class="mb-4">
+            <label for="{{ form.is_owner.id_for_label }}" class="block text-gray-700 font-bold mb-2">
+                Are you Owner?
+            </label>
+            {{ form.is_owner }}
+        </div>
+
+        <div id="animals-field" class="mb-4 hidden">
+            <label class="block text-gray-700 font-bold mb-2">
+                Select Animals
+            </label>
+            {{ form.animals }}
+        </div>
+    </div>
+
+    <div class="col-span-2">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+            Register
+        </button>
+    </div>
+</form>
+</div> -->
+
+<script>
+    const isOwnerCheckbox = document.getElementById("id_is_owner");
+    const animalsField = document.getElementById("animals-field");
+    const animalsSelect = document.getElementById("id_animals");
+  
+    isOwnerCheckbox.addEventListener("change", () => {
+      if (isOwnerCheckbox.checked) {
+        animalsField.classList.remove("hidden");
+        // Add a custom validation function
+        animalsSelect.addEventListener("change", validateAnimals);
+      } else {
+        animalsField.classList.add("hidden");
+        // Remove the custom validation function
+        animalsSelect.removeEventListener("change", validateAnimals);
+        // Clear any previous validation message
+        animalsSelect.setCustomValidity("");
+      }
+    });
+  
+    function validateAnimals() {
+      if (animalsSelect.value.length === 0) {
+        // Set a custom validation message
+        animalsSelect.setCustomValidity("Please select at least one animal.");
+      } else {
+        // Clear the validation message
+        animalsSelect.setCustomValidity("");
+      }
+    }
+  </script>
+{% endblock %}

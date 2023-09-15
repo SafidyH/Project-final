@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ user.username }}'s Profile</h1>
+  
+  <!-- Display user's publications -->
+  <h2>Publications</h2>
+  <ul>
+    {% for publication in publications %}
+      <li>{{ publication.title }}</li>
+      <li>{{ publication.content }}</li>
+    {% endfor %}
+  </ul>
+  
+  <!-- Your other content here -->
+{% endblock %}

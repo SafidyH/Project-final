@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="mx-auto max-w-md p-6 bg-blue-200 rounded-lg shadow-lg">
+
+  <div class="flex items-center mb-2">
+    <!-- User avatar with initials -->
+    <div class="w-8 h-8 bg-blue-500 text-white font-bold rounded-full flex items-center justify-center mr-2 uppercase">
+      {{ publication.user.username|slice:"0:1" }}
+    </div>
+    <h2 class="text-sm font-semibold">{{ publication.user.username }}</h2>
+  </div>
+
+  <div class="text-slate-900 p-2">{{ publication.content }}</div>
+  <hr  class=" border-black mb-2">
+
+
+  <div class="flex flex-col space-y-3 mb-2 max-h-60 overflow-y-scroll">
+    {% for comment in comments %}
+    <div class="flex w-full items-start">
+      <div class="flex flex-col">
+        <!-- User avatar with initials -->
+        <div class="w-8 h-8 bg-green-500 text-white font-bold rounded-full flex items-center justify-center mr-2">
+          {{ comment.user.username|slice:"0:1" }}
+        </div>
+      
+      </div>
+      <div class="flex flex-col  rounded-lg bg-gray-200 flex-1 p-3">
+        <div class="font-semibold text-xs">{{ comment.user.username }}</div>
+        <div class="text-gray-600 mt-1 text-sm">{{ comment.text }}</div>
+      </div>
+     
+    </div>
+    {% empty %}
+    <div class="text-xs">No comments yet.</div>
+    {% endfor %}
+  </div>
+  <hr  class=" border-black mb-2">
+  <form method="post">
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+  
+    <div class="mb-4">
+      <label for="{{ form.text.id_for_label }}" class="block text-sm font-medium text-gray-700">Comment</label>
+      <input type="text" id="{{ form.text.id_for_label }}" name="{{ form.text.name }}"
+        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200" />
+    </div>
+    <div class="flex justify-between">
+      <a href="{% url 'home' %}" class="bg-slate-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Back 
+      </a>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Create Comment
+      </button>
+    </div>
+    
+   
+  </form>
+  <!-- Back to Publication List button -->
+ 
+</div>
+{% endblock %}

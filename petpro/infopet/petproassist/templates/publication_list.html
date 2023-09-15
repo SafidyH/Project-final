@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-2xl font-semibold mb-4">All Publications</h1>
+  
+  <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    {% for publication in publications %}
+      <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="p-4">
+          <div class="flex items-center mb-2">
+            <!-- User avatar with initials -->
+            <div class="w-10 h-10 bg-blue-500 text-white font-bold rounded-full flex items-center justify-center mr-2">
+              {{ publication.user.username|slice:"0:1" }}
+            </div>
+            
+            <h2 class="text-lg font-semibold">{{ publication.user.username }}</h2>
+          </div>
+          
+          <h3 class="text-xl font-semibold">{{ publication.title }}</h3>
+          <p class="text-gray-600 mt-2">{{ publication.content }}</p>
+          
+          <div class="mt-4">
+            <a href="{% url 'publication_detail' publication.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+              View Details
+            </a>
+            
+            <a href="{% url 'create_comment' publication.pk %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-2">
+              Comment
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div>No publications available.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

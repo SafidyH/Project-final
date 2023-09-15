@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="bg-gray-100 min-h-screen py-16">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-extrabold text-gray-800 leading-tight mb-4">Welcome to Our Website</h1>
+      <p class="text-lg text-gray-600 mb-8">Discover amazing things with us.</p>
+      <a href="/products/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
+        Explore Products
+      </a>
+
+      <a href="{% url 'update_user' user.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
+        Update User
+      </a>
+
+      <a href="{% url 'profile' user.username %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
+        View Profile
+      </a>
+      <a href="{% url 'create_publication' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block">
+        Publier
+      </a>
+      
+    </div>
+        <!-- Add links to login and registration pages -->
+  <div class="mb-4">
+    <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
+  </div>
+
+  <div>
+    <a href="{% url 'register' %}" class="text-green-500 hover:underline">Register</a>
+  </div>
+    <div>
+     <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full inline-block">Logout</a>
+    </div>
+    <div><a href="{% url 'profile' user.username %}">Profil</a></div>
+  </div>
+{% endblock %}

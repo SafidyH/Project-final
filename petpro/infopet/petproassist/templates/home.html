@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class=" flex justify-between">
+  <div class="">
+    <img src="https://picsum.photos/400/200/?random&category=animals" alt="Pet Image 1">
+  </div>
+  <div class="">
+    <img src="https://picsum.photos/400/200/?random&category=animals" alt="Pet Image 2">
+  </div>
+  <div class="">
+    <img src="https://picsum.photos/400/200/?random&category=animals" alt="Pet Image 3">
+  </div>
+</div>
+
+<div class="flex flex-col">
+
+  <div class="mb-4">
+    <h3 class="text-2xl font-semibold mb-4">Publications</h3>
+
+    {% if user.is_authenticated %}
+    <div class="mt-4">
+      <a href="{% url 'create_publication' %}"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Publish</a>
+    </div>
+    {% endif %}
+  </div>
+
+
+
+  <input type="text" id="publication-search" class="p-2 rounded border border-gray-300 mb-4" placeholder="Search by content">
+
+  <div class="flex flex-wrap gap-x-2 gap-y-2 justify-center">
+    {% for publication in publications %}
+    <!-- <a href="{% url 'publication_detail' publication.pk %}" class="block"> -->
+      <div class="bg-white shadow-md rounded-lg overflow-hidden w-72 p-4 publication-card">
+        <!-- <div class=""> -->
+          <div class="flex items-center mb-2">
+            <!-- User avatar with initials -->
+            <div
+              class="w-8 h-8 bg-blue-500 text-white font-bold rounded-full flex items-center justify-center mr-2 uppercase">
+              {{ publication.user.username|slice:"0:1" }}
+            </div>
+            <span class="font-semibold text-sm">{{ publication.user.username }}</span>
+          </div>
+
+          <div class="text-gray-800 mt-2 publication-content">{{ publication.content }}</div>
+
+          
+          <div class="mt-4 flex justify-end">
+            {% if user.is_authenticated %}
+            <!-- <a href="{% url 'create_comment' publication.pk %}"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block mr-2 text-xs">
+              <i class="fas fa-eye mr-1"></i> 
+              View Details
+            </a> -->
+
+            <a href="{% url 'create_comment' publication.pk %}"
+              class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full inline-block text-xs">
+              <i class="fas fa-comment mr-1"></i> <!-- FontAwesome icon -->
+              Comment
+            </a>
+            {% endif %}
+          </div>
+        <!-- </div> -->
+      </div>
+    <!-- </a> -->
+    {% empty %}
+    <div>No publications available.</div>
+    {% endfor %}
+  </div>
+
+
+</div>
+
+<script>
+  // Function to filter publications based on content
+  function filterPublications() {
+      const searchText = document.getElementById('publication-search').value.toLowerCase();
+      const publications = document.querySelectorAll('.publication-card');
+
+      publications.forEach((publication) => {
+          const content = publication.querySelector('.publication-content').textContent.toLowerCase();
+          if (content.includes(searchText)) {
+              publication.style.display = 'block';  // Show the publication
+          } else {
+              publication.style.display = 'none';   // Hide the publication
+          }
+      });
+  }
+
+  // Event listener to trigger filtering when the search input changes
+  document.getElementById('publication-search').addEventListener('input', filterPublications);
+</script>
+
+
+
+{% endblock %}
